@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GnabilaNews - Portal Berita Terkini</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f9fa;
+      color: #212529;
+    }
+
+    .navbar {
+      background: linear-gradient(90deg, #002855, #004aad);
+    }
+    .navbar-brand {
+      font-size: 1.7rem;
+      font-weight: bold;
+    }
+    .navbar-brand i {
+      color: #ffc107;
+    }
+    .navbar-brand span {
+      color: #ffc107;
+    }
+    .nav-link {
+      color: #fff !important;
+      margin-left: 15px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    .nav-link:hover {
+      color: #ffc107 !important;
+    }
+
+    .headline {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      margin-top: 30px;
+    }
+    .headline img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+    .headline-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 30px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.1), rgba(0,0,0,0.85));
+      color: #fff;
+      border-radius: 15px;
+    }
+    .headline-content h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #ffc107;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+    }
+
+    .news-section {
+      margin-top: 60px;
+    }
+    .section-title {
+      font-weight: 700;
+      border-left: 5px solid #004aad;
+      padding-left: 10px;
+      margin-bottom: 25px;
+      color: #002855;
+    }
+    .news-card {
+      border: none;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: 0.3s;
+      background-color: #fff;
+    }
+    .news-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    .news-card img {
+      height: 220px;
+      object-fit: cover;
+    }
+
+    footer {
+      background: linear-gradient(90deg, #002855, #004aad);
+      color: #fff;
+      padding: 20px 0;
+    }
+    footer i {
+      color: #ffc107;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark shadow-sm sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <i class="bi bi-newspaper"></i> Gnabila<span>News</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse text-center" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Beranda</a></li>
+          <li class="nav-item"><a class="nav-link" href="nasional.html">Nasional</a></li>
+          <li class="nav-item"><a class="nav-link" href="internasional.html">Internasional</a></li>
+          <li class="nav-item"><a class="nav-link" href="teknologi.html">Teknologi</a></li>
+          <li class="nav-item"><a class="nav-link" href="olahraga.html">Olahraga</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Headline -->
+  <section class="container">
+    <div class="headline shadow">
+      <img src="https://www.melayuposindonesia.com/wp-content/uploads/2023/04/IMG_20230402_080850.jpg" alt="Headline Berita">
+      <div class="headline-content">
+        <h1>Indonesia Resmi Jadi Tuan Rumah Piala Dunia U-20</h1>
+        <p>FIFA resmi menunjuk Indonesia sebagai tuan rumah Piala Dunia U-20 tahun depan. Persiapan infrastruktur dan stadion sudah dimulai di berbagai daerah.</p>
+        <button class="btn btn-warning mt-3 fw-bold">Baca Selengkapnya <i class="bi bi-arrow-right-circle"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pencarian -->
+  <div class="container mt-5">
+    <input type="text" id="searchInput" onkeyup="searchNews()" class="form-control shadow-sm" placeholder="Cari berita...">
+  </div>
+
+  <!-- Daftar Berita -->
+  <main class="container news-section">
+    <h2 class="section-title"><i class="bi bi-lightbulb-fill text-warning"></i> Berita Terkini</h2>
+    <div class="row" id="newsContainer"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center mt-5">
+    <p class="mb-0">
+      <i class="bi bi-lightning-charge-fill"></i>
+      &copy; 2025 <strong>GnabilaNews</strong> | Portal Berita Terkini
+    </p>
+  </footer>
+
+  <script>
+    const newsData = [
+      { img: "https://pict.sindonews.net/dyn/850/pena/news/2023/04/16/767/1074201/roket-ariane-5-diluncurkan-untuk-memburu-alien-di-jupiter-emj.jpg", title: "Peluncuran Roket Baru oleh SpaceX Sukses", date: "28 September 2025", desc: "SpaceX berhasil meluncurkan roket terbaru dengan teknologi ramah lingkungan." },
+      { img: "http://eksplorasi.id/wp-content/uploads/2017/12/Pom-Bensin-Konfrontasi_0.jpg", title: "Harga BBM Turun Mulai Bulan Depan", date: "27 September 2025", desc: "Pemerintah mengumumkan penurunan harga BBM sebesar Rp500 per liter." },
+      { img: "https://cloud.jpnn.com/photo/arsip/watermark/2021/06/18/timnas-bola-basket-indonesia-saat-bertanding-melawan-filipin-58.jpg", title: "Timnas Basket Indonesia Raih Emas SEA Games", date: "26 September 2025", desc: "Timnas Basket Indonesia meraih emas pertama dalam sejarah SEA Games!" },
+      { img: "https://mamikita.com/wp-content/uploads/2022/12/4-2.png", title: "Teknologi AI Membantu Dunia Pendidikan", date: "25 September 2025", desc: "AI kini semakin berperan besar dalam pendidikan modern." },
+      { img: "https://petaniquick.com/wp-content/uploads/2021/06/Cakar-Baja-Lahan-Kering-1024x576.jpg", title: "Cuaca Ekstrem Ancam Panen Petani", date: "24 September 2025", desc: "BMKG memperingatkan potensi gagal panen akibat cuaca ekstrem." },
+      { img: "https://radiobrite.com/images/2022/Mar22/Mobil-Listrik.jpg", title: "Startup Indonesia Kembangkan Mobil Listrik Lokal", date: "23 September 2025", desc: "Inovasi baru dari anak bangsa siap produksi mobil listrik lokal!" }
+    ];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const container = document.getElementById("newsContainer");
+      newsData.forEach(news => {
+        container.innerHTML += `
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card news-card shadow-sm">
+              <img src="${news.img}" alt="${news.title}">
+              <div class="card-body">
+                <h5>${news.title}</h5>
+                <p class="text-muted small mb-2">
+                  <i class="bi bi-calendar-event"></i> ${news.date}
+                </p>
+                <p>${news.desc}</p>
+                <button class="btn btn-primary btn-sm">
+                  Baca Selengkapnya <i class="bi bi-arrow-right-circle-fill"></i>
+                </button>
+              </div>
+            </div>
+          </div>`;
+      });
+    });
+
+    function searchNews() {
+      const query = document.getElementById("searchInput").value.toLowerCase();
+      const cards = document.querySelectorAll(".news-card");
+
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.parentElement.style.display = text.includes(query) ? "block" : "none";
+      });
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
